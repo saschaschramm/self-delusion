@@ -95,3 +95,5 @@ for index in range(3):
     example 2 – actions 1 4 2 3 1  4 4 2 1 5  1 5 1 1 1  1 1 1 4 2  
     example 3 – actions 5 1 5 5 5  5 5 5 5 5  1 5 4 5 3  4 5 5 5 5  
 
+
+The expert interacts with the bandite regardless of the past actions. However, if we use our model to imitate the expert, the past actions suddenly have an impact on the probability of the next action.

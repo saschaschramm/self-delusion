@@ -1,14 +1,15 @@
 import config
+from typing import Any
 
 class Model():
 
-    def _joint_probability(self, interactions, latents) -> float:
+    def _joint_probability(self, interactions: list[Any], latents: list[int]) -> float:
         joint_probs: float = 0
         for latent in latents:
             prob: float = 1.0
             next_action_prob: float = 1.0
             for interaction in interactions:
-                action = interaction[0]
+                action: int = interaction[0]
                 if len(interaction) == 1:
                     next_action_prob = config.prob_action(latent)[action-1]
                     break
@@ -25,7 +26,7 @@ class Model():
         latent: int = config.ACTION_SPACE[0]
         remaining_latents: list[int] = config.ACTION_SPACE[1:]
         for action in config.ACTION_SPACE:
-            next_action: list[(int, )] = [(action,)]
+            next_action: list[tuple[int]] = [(action,)]
             prob_before_latent: float = self._joint_probability(interactions=past_interactions, latents=[latent])
             prob_after_latent: float = self._joint_probability(interactions=past_interactions + next_action, latents=[latent])
             prob_before_remaining_latent: float = self._joint_probability(interactions=past_interactions, latents=remaining_latents)
